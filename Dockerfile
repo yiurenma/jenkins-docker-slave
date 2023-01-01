@@ -2,6 +2,8 @@ FROM ubuntu:20.04
 
 LABEL maintainer="Bibin Wilson <bibinwilsonn@gmail.com>"
 
+ARG DEBIAN_FRONTEND=noninteractive
+
 # Make sure the package repository is up to date.
 RUN apt-get update && \
     apt-get -qy full-upgrade && \
@@ -17,13 +19,12 @@ RUN apt-get update && \
 # Add user jenkins to the image
     adduser --quiet jenkins && \
 # Install docker  \
-    apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
-    apt-key fingerprint 0EBFCD88 && \
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
-    apt-get update -qq && \
-    apt-get install -qqy docker-ce && \
-    usermod -aG docker jenkins && \
+    sudo apt update && \
+    sudo apt install apt-transport-https ca-certificates curl software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && \
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
+    sudo apt install docker-ce && \
+    sudo usermod -aG docker jenkins && \
 # Cleanup old packages
     apt-get -qy autoremove && \
 # Set password for the jenkins user (you may want to alter this).
