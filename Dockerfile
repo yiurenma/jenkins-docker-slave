@@ -14,10 +14,18 @@ RUN apt-get update && \
     apt-get install -qy default-jdk && \
 # Install maven
     apt-get install -qy maven && \
-# Cleanup old packages
-    apt-get -qy autoremove && \
 # Add user jenkins to the image
     adduser --quiet jenkins && \
+# Install docker  \
+    apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common && \
+    curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
+    apt-key fingerprint 0EBFCD88 && \
+    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" && \
+    apt-get update -qq && \
+    apt-get install -qqy docker-ce && \
+    usermod -aG docker jenkins && \
+# Cleanup old packages
+    apt-get -qy autoremove && \
 # Set password for the jenkins user (you may want to alter this).
     echo "jenkins:jenkins" | chpasswd && \
     mkdir /home/jenkins/.m2
