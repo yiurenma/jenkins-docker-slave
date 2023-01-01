@@ -18,16 +18,16 @@ RUN apt-get install -qy default-jdk
 RUN apt-get install -qy maven
 # Add user jenkins to the image
 RUN adduser --quiet jenkins
-# Install Docker from official repo
-USER root
-RUN apt-get update -qq && \
-    apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common && \
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-    apt-key fingerprint 0EBFCD88 && \
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
-    apt-get update -qq && \
-    apt-get install -qqy docker-ce && \
-    usermod -aG docker jenkins
+## Install Docker from official repo
+#USER root
+#RUN apt-get update -qq && \
+#    apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common && \
+#    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+#    apt-key fingerprint 0EBFCD88 && \
+#    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
+#    apt-get update -qq && \
+#    apt-get install -qqy docker-ce && \
+#    usermod -aG docker jenkins
 # Cleanup old packages
 RUN apt-get -qy autoremove
 # Set password for the jenkins user (you may want to alter this).
