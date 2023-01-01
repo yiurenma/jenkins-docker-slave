@@ -17,7 +17,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ## Install maven
 #RUN apt-get install -qy maven
 # Add user jenkins to the image
-RUN adduser --quiet jenkins
+#RUN adduser --quiet jenkins
 ## Install Docker from official repo
 #USER root
 #RUN apt-get update -qq && \
