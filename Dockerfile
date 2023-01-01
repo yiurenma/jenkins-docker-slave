@@ -27,7 +27,7 @@ RUN apt-get update -qq && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" && \
     apt-get update -qq && \
     apt-get install -qqy docker-ce && \
-    usermod -aG docker jenkins && \
+    usermod -aG docker jenkins
 # Cleanup old packages
 RUN apt-get -qy autoremove
 # Set password for the jenkins user (you may want to alter this).
