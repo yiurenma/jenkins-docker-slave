@@ -26,19 +26,19 @@ RUN sudo apt-get install -y \
         ca-certificates \
         curl \
         software-properties-common
-    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo apt-key fingerprint 0EBFCD88
-    sudo add-apt-repository \
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+RUN sudo apt-key fingerprint 0EBFCD88
+RUN sudo add-apt-repository \
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
        $(lsb_release -cs) \
        stable"
-    sudo apt-get update
-    sudo apt-get install -y docker-ce
-    sudo docker run hello-world
+RUN sudo apt-get update
+RUN sudo apt-get install -y docker-ce
+RUN sudo docker run hello-world
     # Linux post-install
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
-    sudo systemctl enable docker
+RUN sudo groupadd docker
+RUN sudo usermod -aG docker $USER
+RUN sudo systemctl enable docker
 # Cleanup old packages
 RUN apt-get -qy autoremove
 # Set password for the jenkins user (you may want to alter this).
