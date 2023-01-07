@@ -21,24 +21,24 @@ RUN apt-get install -qy maven
 # Add user jenkins to the image
 RUN adduser --quiet jenkins
 ## Install Docker from official repo
-RUN sudo apt-get install -y \
+RUN apt-get install -y \
         apt-transport-https \
         ca-certificates \
         curl \
         software-properties-common
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-RUN sudo apt-key fingerprint 0EBFCD88
-RUN sudo add-apt-repository \
+RUN apt-key fingerprint 0EBFCD88
+RUN add-apt-repository \
        "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
        $(lsb_release -cs) \
        stable"
-RUN sudo apt-get update
-RUN sudo apt-get install -y docker-ce
-RUN sudo docker run hello-world
+RUN apt-get update
+RUN apt-get install -y docker-ce
+RUN docker run hello-world
     # Linux post-install
-RUN sudo groupadd docker
-RUN sudo usermod -aG docker $USER
-RUN sudo systemctl enable docker
+RUN groupadd docker
+RUN usermod -aG docker $USER
+RUN systemctl enable docker
 # Cleanup old packages
 RUN apt-get -qy autoremove
 # Set password for the jenkins user (you may want to alter this).
